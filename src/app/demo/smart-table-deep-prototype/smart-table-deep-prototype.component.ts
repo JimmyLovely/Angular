@@ -3,11 +3,15 @@ import { Component, OnInit } from '@angular/core';
 // 3rd
 import { LocalDataSource } from 'ng2-smart-table';
 
+// model
+import { IProduct } from 'src/app/model/product';
+import { ISystemInfo } from 'src/app/model/system-info';
+
 // Service
 import { IVmDetailService } from '../../service/i-vm-detail.service';
 
+// Component
 import { MachineNameRenderComponent } from '../machine-name-render/machine-name-render.component';
-import { IProduct } from 'src/app/model/product';
 
 @Component({
     selector: 'app-smart-table-deep-prototype',
@@ -44,6 +48,9 @@ export class SmartTableDeepPrototypeComponent implements OnInit {
                 type: 'string',
                 valuePrepareFunction: (productInfo: IProduct[]) => {
                     return productInfo.map(product => product.name).join(',');
+                },
+                filterFunction: (productInfo: IProduct[], query: string) => {
+                    return productInfo.some(product => product.name.toLowerCase().indexOf(query.toLowerCase()) > -1);
                 }
             },
             installation: {
@@ -53,7 +60,8 @@ export class SmartTableDeepPrototypeComponent implements OnInit {
             systemInfo: {
                 title: 'OS',
                 type: 'string',
-                valuePrepareFunction: systemInfo => systemInfo.os
+                valuePrepareFunction: systemInfo => systemInfo.os,
+                filterFunction: (systemInfo: ISystemInfo, query: string) => systemInfo.os.toLowerCase().indexOf(query.toLowerCase()) > -1
             },
             ip: {
                 title: 'IP',
