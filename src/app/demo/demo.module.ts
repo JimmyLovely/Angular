@@ -16,6 +16,7 @@ import { IVmService } from '../service/i-vm.service';
 import { VmMockService } from '../mock/vm.service';
 import { IVmDetailService } from '../service/i-vm-detail.service';
 import { VmDetailService } from '../mock/vm-detail.service';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 @NgModule({
   declarations: [
