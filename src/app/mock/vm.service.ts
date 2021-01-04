@@ -230,4 +230,8 @@ export class VmMockService extends IVmService{
     getAll(): Observable<Vm[]> {
         return observableOf(this.VMData);
     }
+
+    getAllWithOutObservable(): Vm[] {
+        return this.VMData;
+    }
 }
