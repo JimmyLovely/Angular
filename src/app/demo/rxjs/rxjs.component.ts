@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { from, fromEvent, interval, Observable, of } from "rxjs";
+import { fromEvent, interval, Observable, of, pipe, range } from "rxjs";
+import { catchError, filter, map, retry } from 'rxjs/operators';
+import { ajax, AjaxResponse } from 'rxjs/ajax';
 
 // Model
 import { IVm } from 'src/app/model/vm';
@@ -15,6 +17,7 @@ import { IVmService } from "../../service/i-vm.service";
 export class RxjsComponent implements OnInit {
 
     private vms: IVm[];
+    private vms$: Observable<IVm[]>;
 
     private vms1$: Observable<IVm[]>;
 
@@ -24,6 +27,7 @@ export class RxjsComponent implements OnInit {
 
     ngOnInit(): void {
         this.vms = this.vmService.getAllWithOutObservable();
+        this.vms$ = this.vmService.getAll();
     }
 
     // creation with of
@@ -34,7 +38,7 @@ export class RxjsComponent implements OnInit {
             window.console.log(vms);
             debugger;
 
-        }, error=> {
+        }, error => {
             window.console.log(error);
         }, () => {
             window.console.log('complete');
@@ -43,17 +47,12 @@ export class RxjsComponent implements OnInit {
 
     // creation with interval
     createWithInterval(): void {
-        const valueForInterval: Observable<Number> = interval(1000);
+        const valueForInterval: Observable<number> = interval(1000);
 
         valueForInterval.subscribe(n => {
             window.console.log(n);
         })
     }
-
-    // creation with from
-    // createWithFrom(): void {
-    // TBD
-    // }
 
     createWithFromEvent(): void {
         const testElement = document.querySelector('#test');
@@ -65,5 +64,56 @@ export class RxjsComponent implements OnInit {
                 inputChangeEventSubScription.unsubscribe();
             }
         })
+    }
+
+    // operation - map/filter
+    operationWithMap(): void {
+        const numbers$: Observable<number> = range(0, 10);
+
+        const doubleWithMap = map((value: number) => value * 2);
+        const oddWithFilter = filter((value: number) => value % 2 === 0);
+
+        const pipeFilterAndMap = pipe(
+            oddWithFilter,
+            doubleWithMap
+        );
+
+        window.console.log('Step by step');
+        pipeFilterAndMap(numbers$).subscribe((n: number) => {
+            window.console.log(n);
+        });
+
+        window.console.log('chain');
+        numbers$.pipe(
+            map((value: number) => value * 2),
+            filter((value: number) => value % 2 === 0)
+        ).subscribe((n: number) => {
+            window.console.log(n);
+        });
+    }
+
+    // catch error
+    catchErrorThings(): void {
+        const apiData$ = ajax('/api/demo');
+
+        apiData$.pipe(
+            map((res: AjaxResponse) => {
+                if (!res.response) {
+                    throw new Error("Value expected!");
+                } else {
+                    return res.response;
+                }
+            }),
+            retry(3),
+            catchError((err, caught) => {
+                return of({ err: err, caught: caught });
+            })
+        ).subscribe(response => {
+            window.console.log(response);
+        }, error => {
+            window.console.log(error);
+        }, () => {
+            window.console.log('Complete');
+        });
     }
 }
