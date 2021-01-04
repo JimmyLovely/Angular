@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { DemoComponent } from './demo.component';
 import { SmartTableComponent } from './smart.table/smart.table.component';
 import { SmartTableDeepPrototypeComponent } from './smart-table-deep-prototype/smart-table-deep-prototype.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 const routes: Routes = [
     {
@@ -16,6 +17,9 @@ const routes: Routes = [
             }, {
                 path: 'smarttable-deep-prototype',
                 component: SmartTableDeepPrototypeComponent
+            }, {
+                path: 'rxjs',
+                component: RxjsComponent
             }
         ]
     }
@@ -30,5 +34,6 @@ export class DemoRoutingModule { }
 export const DemoComponents = [
     DemoComponent,
     SmartTableComponent,
-    SmartTableDeepPrototypeComponent
+    SmartTableDeepPrototypeComponent,
+    RxjsComponent
 ];
