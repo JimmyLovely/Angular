@@ -9,20 +9,18 @@ import { DemoRoutingModule, DemoComponents } from './demo-routing.module';
 
 // Component
 import { MachineNameRenderComponent } from './machine-name-render/machine-name-render.component';
-import { SmartTableDeepPrototypeComponent } from './smart-table-deep-prototype/smart-table-deep-prototype.component';
 
 // Service
 import { IVmService } from '../service/i-vm.service';
 import { VmMockService } from '../mock/vm.service';
 import { IVmDetailService } from '../service/i-vm-detail.service';
 import { VmDetailService } from '../mock/vm-detail.service';
-import { RxjsComponent } from './rxjs/rxjs.component';
+
 
 @NgModule({
   declarations: [
     ...DemoComponents,
-    MachineNameRenderComponent,
-    SmartTableDeepPrototypeComponent
+    MachineNameRenderComponent
   ],
   entryComponents: [
     MachineNameRenderComponent
