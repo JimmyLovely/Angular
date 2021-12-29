@@ -1,7 +1,3 @@
-:host .test-attr-maxlength input{
-    display: block;
-}
-
-:host .others input {
+:host input{
     display: block;
 }
