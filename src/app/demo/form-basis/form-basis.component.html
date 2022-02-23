@@ -1,0 +1,25 @@
+<p>form-basis works!</p>
+<div class="test-attr-maxlength">
+    <!-- Not render -->
+    <input type="text" [attr.maxlength]="null">
+    <input type="text" [attr.maxlength]="undefined">
+    <input type="text" [attr.maxlength]="''">
+
+    <!-- Render & Not effect -->
+    <input type="text" [attr.maxlength]="false">
+    <input type="text" [attr.maxlength]="'a'">
+    <input type="text" [attr.maxlength]="'-1'">
+    <input type="text" [attr.maxlength]="-1">
+
+    <!-- Render & Effect -->
+    <input type="text" [attr.maxlength]="0">
+    <input type="text" [attr.maxlength]="'0'">
+    <input type="text" [attr.maxlength]="5">
+    <input type="text" [attr.maxlength]="'5'">
+    <input type="text" [attr.maxlength]="1.67">
+</div>
+
+<div class="test-property-bindings">
+    <!-- value: attribute -> property only, if property changed, attribute -\-> property-->
+    <input type="text" maxlength="4" id="ti" data-custom-attr="custom attr" title1='title1'>
+</div>
