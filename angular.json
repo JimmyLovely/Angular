@@ -18,7 +18,9 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": false,
+            "aot": true,
+            "localize": true,
+            "i18nMissingTranslation": "error",
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -86,6 +88,9 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "zhBuild": {
+              "localize": ["zh"]
             }
           }
         },
@@ -97,6 +102,9 @@
           "configurations": {
             "production": {
               "browserTarget": "demo:build:production"
+            },
+            "zhServe":{
+              "browserTarget": "demo:build:zhBuild"
             }
           }
         },
@@ -148,7 +156,20 @@
             }
           }
         }
+      },
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "zh": {
+            "translation":"src/locale/messages.zh.xlf",
+            "baseHref": ""
+          }
+        }
       }
-    }},
-  "defaultProject": "demo"
+    }
+  },
+  "defaultProject": "demo",
+  "cli": {
+    "analytics": false
+  }
 }

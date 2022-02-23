@@ -6,6 +6,7 @@ import { DemoComponent } from './demo.component';
 import { SmartTableComponent } from './smart.table/smart.table.component';
 import { SmartTableDeepPrototypeComponent } from './smart-table-deep-prototype/smart-table-deep-prototype.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { I18nComponent } from "./i18n/i18n.component";
 
 const routes: Routes = [
     {
@@ -20,6 +21,9 @@ const routes: Routes = [
             }, {
                 path: 'rxjs',
                 component: RxjsComponent
+            }, {
+                path: 'i18n',
+                component: I18nComponent
             }
         ]
     }
@@ -35,5 +39,6 @@ export const DemoComponents = [
     DemoComponent,
     SmartTableComponent,
     SmartTableDeepPrototypeComponent,
-    RxjsComponent
+    RxjsComponent,
+    I18nComponent
 ];

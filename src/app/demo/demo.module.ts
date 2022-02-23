@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from "@angular/forms";
 
 // 3rd
 import { Ng2SmartTableModule } from "ng2-smart-table";
@@ -16,7 +17,6 @@ import { IVmService } from '../service/i-vm.service';
 import { VmMockService } from '../mock/vm.service';
 import { IVmDetailService } from '../service/i-vm-detail.service';
 import { VmDetailService } from '../mock/vm-detail.service';
-import { RxjsComponent } from './rxjs/rxjs.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +29,7 @@ import { RxjsComponent } from './rxjs/rxjs.component';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     Ng2SmartTableModule,
     DemoRoutingModule
   ],

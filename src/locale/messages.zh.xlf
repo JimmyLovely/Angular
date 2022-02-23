@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="d99b4d5e47ac1961d5d666875cc14d309e95ed0a" datatype="html">
+        <source>Hello i18n!</source>
+        <target>Ni Hao i18n!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/demo/i18n/i18n.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <note priority="1" from="description">introduce for i18n</note>
+        <note priority="1" from="meaning">site header</note>
+      </trans-unit>
+      <trans-unit id="6cc6449b17380fa0311e43104d72cb7af88401a7" datatype="html">
+        <source>This content is hidden</source>
+        <target>Zhe Ge Nei Rong Bu Xian Shi</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/demo/i18n/i18n.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f58ee9ef41031a927dcdc895dcf086131b9eb8e4" datatype="html">
+        <source>no image</source>
+        <target>Mei You Tu Pian</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/demo/i18n/i18n.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6120cb1b4e9c2de44d68752c8a90f3cbb4033d63" datatype="html">
+        <source>Updated <x id="ICU" equiv-text="{min, plural, =0 {...} =1 {...} other {...}}"/></source>
+        <target>Geng Xin <x id="ICU" equiv-text="{min, plural, =0 {...} =1 {...} other {...}}"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/demo/i18n/i18n.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0e64875e7665ed9dbf74b7707651266f40d1217f" datatype="html">
+        <source>{VAR_PLURAL, plural, =0 {zero} =1 {one} other {<x id="INTERPOLATION" equiv-text="{{min}}"/> agos} }</source>
+        <target>{VAR_PLURAL, plural, =0 {Ling} =1 {Yi} other {<x id="INTERPOLATION" equiv-text="{{min}}"/> Zhi Qian} }</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/demo/i18n/i18n.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="83f10780562ff8732644ba7c61c5615ddce82718" datatype="html">
+        <source>Select  <x id="ICU" equiv-text="{min, select, 0 {...} 1 {...} other {...}}"/></source>
+        <target>Xuan Zhe  <x id="ICU" equiv-text="{min, select, 0 {...} 1 {...} other {...}}"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/demo/i18n/i18n.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cd3f48d1591c399813d1168360d826465a57d62d" datatype="html">
+        <source>{VAR_SELECT, select, 0 {zero} 1 {one} other {<x id="INTERPOLATION" equiv-text="{{min}}"/> agos} }</source>
+        <target>{VAR_SELECT, select, 0 {Ling} 1 {Yi} other {<x id="INTERPOLATION" equiv-text="{{min}}"/> Zhi Qian} }</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/demo/i18n/i18n.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
