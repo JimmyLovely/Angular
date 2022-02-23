@@ -1,0 +1,42 @@
+<p>i18n works!</p>
+<div>
+    <div>
+        <label>{{amount | currency}}</label>
+        <br>
+        <label>{{amount | currency : undefined : 'symbol' : undefined : 'fr-CA'}}</label>
+        <br>
+        <label>{{amount | currency : undefined : 'symbol' : undefined : 'zh'}}</label>
+        <br>
+        <label>{{amount | currency : undefined : 'symbol' : undefined : 'en-US'}}</label>
+        <br>
+        <label>{{amount | currency : undefined : 'symbol' : undefined : 'en-us'}}</label>
+    </div>
+    <br>
+    <div>
+        <label>{{dateNow | date}}</label>
+        <br>
+        <label>{{dateNow | date : 'mediumDate' : undefined : 'fr-CA'}}</label>
+        <br>
+        <label>{{dateNow | date : 'mediumDate' : undefined : 'zh'}}</label>
+        <br>
+        <label>{{dateNow | date : 'mediumDate' : undefined : 'en-US'}}</label>
+        <br>
+        <label>{{dateNow | date : 'mediumDate' : undefined : 'en-us'}}</label>
+    </div>
+    <br>
+    <div>
+        <span>Hello i18n!</span>
+        <br>
+        <span i18n="site header|introduce for i18n">Hello i18n!</span>
+        <br>
+        <ng-container i18n>This content is hidden</ng-container>
+        <br>
+        <img src="" alt="" title="no image" i18n-title>
+        <br>
+        <input type="text" [(ngModel)]="min">
+        <br>
+        <span i18n>Updated {min, plural, =0 {zero} =1 {one} other {{{min}} agos}}</span>
+        <br>
+        <span i18n>Select  {min, select, 0 {zero} 1 {one} other {{{min}} agos}}</span>
+    </div>
+</div>
