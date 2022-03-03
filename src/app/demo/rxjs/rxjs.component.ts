@@ -12,7 +12,7 @@ import { IVmService } from "../../service/i-vm.service";
 @Component({
     selector: 'app-rxjs',
     templateUrl: './rxjs.component.html',
-    styleUrls: ['./rxjs.component.css']
+    styleUrls: ['./rxjs.component.scss']
 })
 export class RxjsComponent implements OnInit {
 

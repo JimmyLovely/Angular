@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
     selector: 'app-form-basis',
     templateUrl: './form-basis.component.html',
-    styleUrls: ['./form-basis.component.css']
+    styleUrls: ['./form-basis.component.scss']
 })
 export class FormBasisComponent implements OnInit {
 
