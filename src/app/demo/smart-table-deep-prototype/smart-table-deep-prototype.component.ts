@@ -16,7 +16,7 @@ import { MachineNameRenderComponent } from '../machine-name-render/machine-name-
 @Component({
     selector: 'app-smart-table-deep-prototype',
     templateUrl: './smart-table-deep-prototype.component.html',
-    styleUrls: ['./smart-table-deep-prototype.component.css']
+    styleUrls: ['./smart-table-deep-prototype.component.scss']
 })
 export class SmartTableDeepPrototypeComponent implements OnInit {
     constructor(
