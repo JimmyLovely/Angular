@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 // Module
 import { SecondRoutingModule, SecondComponents } from './second-routing.module';
+import { FirstModule } from '../first/first.module';
 
 @NgModule({
     declarations: [
@@ -10,7 +11,8 @@ import { SecondRoutingModule, SecondComponents } from './second-routing.module';
     ],
     imports: [
         CommonModule,
-        SecondRoutingModule
+        SecondRoutingModule,
+        FirstModule
     ]
 })
 export class SecondModule { }
