@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 // Module
 import { FirstRoutingModule, FirstComponents } from "./first-routing.module";
+import { SecondModule } from '../second/second.module';
 
 // Service
 import { FooOneService } from './service/foo-one.service';
@@ -14,7 +15,8 @@ import { FooTwoService } from './service/foo-two.service';
     ],
     imports: [
         CommonModule,
-        FirstRoutingModule
+        FirstRoutingModule,
+        // SecondModule // <-- this is the problem, circular dependency
     ],
     providers: [
         FooOneService,
