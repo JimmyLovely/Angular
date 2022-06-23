@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { fromEvent, interval, Observable, of, pipe, range } from "rxjs";
-import { catchError, filter, map, retry } from 'rxjs/operators';
+import { BehaviorSubject, fromEvent, interval, Observable, of, pipe, range } from "rxjs";
+import { catchError, filter, map, retry, tap } from 'rxjs/operators';
 import { ajax, AjaxResponse } from 'rxjs/ajax';
 
 // Model
@@ -115,5 +115,57 @@ export class RxjsComponent implements OnInit {
         }, () => {
             window.console.log('Complete');
         });
+    }
+
+    mapAndTap() {
+        const maps$ = of(1, 2, 3, 4);
+
+        maps$.pipe(
+            map(x => {
+                return x = x + 3;
+            }),
+            filter(x => {
+                return true;
+            })
+        ).subscribe(foos => {
+            window.console.log(foos);
+        })
+
+        const mapsWithArray$ = of([1, 2, 3, 4]);
+        mapsWithArray$.pipe(
+            map(x => {
+                return x.length;
+            }),
+            filter(x => {
+                return true;
+            })
+        ).subscribe(foos => {
+            window.console.log(foos);
+        })
+
+        const taps$ = of(1, 2, 3, 4);
+
+        taps$.pipe(
+            tap(x => {
+                return x = x + 3;
+            }),
+            filter(x => {
+                return true;
+            })
+        ).subscribe(foos => {
+            window.console.log(foos);
+        })
+
+        const tapsWithArray$ = of([1, 2, 3, 4]);
+        tapsWithArray$.pipe(
+            tap(x => {
+                return x.length;
+            }),
+            filter(x => {
+                return true;
+            })
+        ).subscribe(foos => {
+            window.console.log(foos);
+        })
     }
 }
