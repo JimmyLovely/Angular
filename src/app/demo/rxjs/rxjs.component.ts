@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, fromEvent, interval, Observable, of, pipe, range } from "rxjs";
-import { catchError, filter, map, retry, tap } from 'rxjs/operators';
+import { catchError, filter, map, retry, take, tap } from 'rxjs/operators';
 import { ajax, AjaxResponse } from 'rxjs/ajax';
 
 // Model
@@ -167,5 +167,65 @@ export class RxjsComponent implements OnInit {
         ).subscribe(foos => {
             window.console.log(foos);
         })
+    }
+
+    multipleObservers() {
+        // the pipe is only used to deal with the observable sequences, it's better to deal with javascript data in subscribe method.
+        // If you change the javascript data (array map or observable map), the changes will effect other obserber(s).
+        let firstObserver = this.vms$.pipe(
+            map(x => x.map(x => {
+                x.count = x.count * 3;
+                return x;
+            })),
+            take(1)
+        ).subscribe(x => {
+            window.console.log(x);
+        })
+
+        let secondObserver = this.vms$.pipe(
+            map(x => x.map(x => {
+                window.console.log(x.count);
+                return x;
+            }))
+        ).subscribe(x => {
+            window.console.log(x);
+        })
+
+        let thirdObserver = this.vms$.subscribe(x => {
+            window.console.log(x);
+        });
+
+
+        let valueTypeWithSubject = new BehaviorSubject<IVm>(this.vms[0]);
+        let valueType$ = valueTypeWithSubject.asObservable();
+
+        let firstObserverWithValueType = valueType$.pipe(
+            map(x => {
+                x.count = x.count * 3;
+                return x;
+            })
+        ).subscribe(x => {
+            window.console.log('firstObserverWithValueType', x);
+        })
+
+        let secondObserverWithValueType = valueType$.pipe(
+            map(x => {
+                return x;
+            })
+        ).subscribe(x => {
+            window.console.log('secondObserverWithValueType', x);
+        })
+
+        // next and unsubscribe methods could be inovked by Subject only. Observable has no these methods.
+        valueTypeWithSubject.next(this.vms[1]);
+        valueTypeWithSubject.unsubscribe();
+
+        let thirdObserverWithValueType = valueType$.subscribe(x => {
+            window.console.log('thirdObserverWithValueType', x);
+        });
+
+        let fourthObserverWithValueType = valueTypeWithSubject.subscribe(x => {
+            window.console.log('fourthObserverWithValueType', x);
+        });
     }
 }

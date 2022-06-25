@@ -5,6 +5,7 @@ export interface IVm {
     os: string;
     ip: string;
     owner: string;
+    count: number;
 }
 
 export class Vm {
@@ -18,4 +19,5 @@ export class Vm {
     os: string = "";
     ip: string = "";
     owner: string = "";
+    count: number = -1;
 }
