@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, fromEvent, interval, Observable, of, pipe, range } from "rxjs";
-import { catchError, filter, map, retry, take, tap } from 'rxjs/operators';
+import { BehaviorSubject, fromEvent, interval, Observable, Observer, of, pipe, range, Subscriber } from "rxjs";
+import { catchError, filter, last, map, retry, take, tap } from 'rxjs/operators';
 import { ajax, AjaxResponse } from 'rxjs/ajax';
 
 // Model
@@ -227,5 +227,42 @@ export class RxjsComponent implements OnInit {
         let fourthObserverWithValueType = valueTypeWithSubject.subscribe(x => {
             window.console.log('fourthObserverWithValueType', x);
         });
+    }
+
+    subscribe() {
+        let subscriber = this.vms$.subscribe(x => {
+            window.console.log(x);
+        })
+
+        let partialSubscriberWithNext = this.vms$.subscribe({
+            next: x => {
+                window.console.log(x);
+            }
+        })
+
+        let partialSubscriberWithComplete = this.vms$.subscribe({
+            complete: () => {
+                window.console.log('complete');
+            }
+        })
+
+        let subscriberWithOptionalParameter = this.vms$.subscribe(
+            null,
+            null,
+            () => {
+                window.console.log('complete');
+            }
+        )
+    }
+
+    debounce() {
+        let interval$ = interval(1000);
+
+        interval$.pipe(
+            take(5),
+            last()
+        ).subscribe(x => {
+            window.console.log(x);
+        })
     }
 }
