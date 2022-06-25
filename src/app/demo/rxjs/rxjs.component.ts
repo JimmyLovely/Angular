@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, fromEvent, interval, Observable, Observer, of, pipe, range, Subscriber } from "rxjs";
-import { catchError, filter, map, retry, take, tap } from 'rxjs/operators';
+import { catchError, filter, last, map, retry, take, tap } from 'rxjs/operators';
 import { ajax, AjaxResponse } from 'rxjs/ajax';
 
 // Model
@@ -253,5 +253,16 @@ export class RxjsComponent implements OnInit {
                 window.console.log('complete');
             }
         )
+    }
+
+    debounce() {
+        let interval$ = interval(1000);
+
+        interval$.pipe(
+            take(5),
+            last()
+        ).subscribe(x => {
+            window.console.log(x);
+        })
     }
 }
