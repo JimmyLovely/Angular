@@ -8,6 +8,8 @@ import { SmartTableDeepPrototypeComponent } from './smart-table-deep-prototype/s
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { I18nComponent } from "./i18n/i18n.component";
 import { FormBasisComponent } from './form-basis/form-basis.component';
+import { ParentComponent } from "./parent/parent.component";
+import { ChildComponent } from "./child/child.component";
 
 const routes: Routes = [
     {
@@ -29,6 +31,12 @@ const routes: Routes = [
             }, {
                 path: 'form-basis',
                 component: FormBasisComponent
+            }, {
+                path: 'parent',
+                component: ParentComponent
+            }, {
+                path: 'child',
+                component: ChildComponent
             }
         ]
     }
@@ -46,5 +54,7 @@ export const DemoComponents = [
     SmartTableDeepPrototypeComponent,
     RxjsComponent,
     I18nComponent,
-    FormBasisComponent
+    FormBasisComponent,
+    ParentComponent,
+    ChildComponent
 ];
