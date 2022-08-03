@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+// Model
+import { SimpleObject } from 'src/app/model/simple-object';
+
 @Component({
     selector: 'app-parent',
     templateUrl: './parent.component.html',
@@ -9,6 +12,8 @@ export class ParentComponent implements OnInit {
 
     simpleValue: string = '';
     secondSimpleValue: string = '';
+
+    simpleObjectValue: SimpleObject = new SimpleObject();
 
     constructor() { }
 
@@ -23,6 +28,10 @@ export class ParentComponent implements OnInit {
         setTimeout(() => {
             this.secondSimpleValue = `${this.secondSimpleValue}1`;
         });
+    }
+
+    ChangeSimpleObject() {
+        this.simpleObjectValue = new SimpleObject();
     }
 
 }
