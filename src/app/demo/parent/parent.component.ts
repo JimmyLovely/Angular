@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ParentComponent implements OnInit {
 
+    simpleValue: string = '';
+
     constructor() { }
 
     ngOnInit(): void {
+        this.simpleValue = '12';
     }
 
 }
