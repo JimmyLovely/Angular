@@ -8,11 +8,21 @@ import { Component, OnInit } from '@angular/core';
 export class ParentComponent implements OnInit {
 
     simpleValue: string = '';
+    secondSimpleValue: string = '';
 
     constructor() { }
 
     ngOnInit(): void {
-        this.simpleValue = '12';
+    }
+
+    changeMultipleValue() {
+        // the secondSimpleValue will be listed in SimpleChanges at 1st lifecyle
+        this.simpleValue = `${this.simpleValue}1`;
+
+        // the secondSimpleValue will be listed in SimpleChanges at 2nd lifecyle
+        setTimeout(() => {
+            this.secondSimpleValue = `${this.secondSimpleValue}1`;
+        });
     }
 
 }

@@ -3,3 +3,8 @@
 <div>
     <input type="text" [(ngModel)]="childSimpleValue">
 </div>
+
+<div>
+    <input type="text" [(ngModel)]="innerSimpleValueSubject">
+    <input type="button" value="Change the value of inner property" (click)="changeInnerValue()">
+</div>
