@@ -1,0 +1,16 @@
+<p>child works!</p>
+
+<div>
+    <input type="text" [(ngModel)]="childSimpleValue">
+</div>
+
+<div>
+    <input type="text" [(ngModel)]="innerSimpleValueSubject">
+    <input type="button" value="Change the value of inner property" (click)="changeInnerValue()">
+</div>
+
+<div>
+    <span>Simple Object</span>
+    <input type="text" [(ngModel)]="childSimpleObjectValue.name">
+    <input type="text" [(ngModel)]="childSimpleObjectValue.age">
+</div>

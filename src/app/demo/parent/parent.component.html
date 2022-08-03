@@ -1,0 +1,25 @@
+<p>parent works!</p>
+
+<div>
+    <input type="text" [(ngModel)]="simpleValue">
+</div>
+<div>
+    <input type="text" [(ngModel)]="secondSimpleValue">
+</div>
+<div>
+    <input type="button" value="change value of multiple properties at the same time" (click)="changeMultipleValue()">
+</div>
+<div>
+    <span>Simple Object</span>
+    <input type="text" [(ngModel)]="simpleObjectValue.name">
+    <input type="text" [(ngModel)]="simpleObjectValue.age">
+    <input type="button" value="Change simpleObject" (click)="ChangeSimpleObject()">
+</div>
+<div>
+    <app-child
+        [childSimpleValue]="simpleValue"
+        [childSecondSimpleValue]="secondSimpleValue"
+        [childSimpleObjectValue]="simpleObjectValue"
+        [childSimpleObjectValueName]="simpleObjectValue.name"
+    ></app-child>
+</div>
