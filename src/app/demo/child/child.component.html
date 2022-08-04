@@ -10,7 +10,20 @@
 </div>
 
 <div>
+    <span>Array</span>
+    <span>{{childArraySimpleValue.join('-')}}</span>
+</div>
+
+<div>
     <span>Simple Object</span>
     <input type="text" [(ngModel)]="childSimpleObjectValue.name">
     <input type="text" [(ngModel)]="childSimpleObjectValue.age">
+</div>
+
+<div>
+    <span>Simple Object</span>
+    <input type="text" [(ngModel)]="childDeepObjectValue.simpleProperty">
+    <input type="text" [(ngModel)]="childDeepObjectValue.objectProperty.name">
+    <input type="text" [(ngModel)]="childDeepObjectValue.objectProperty.age">
+    <span>{{childDeepObjectValue.arrayObjectProperty.join('-')}}</span>
 </div>
