@@ -10,10 +10,30 @@
     <input type="button" value="change value of multiple properties at the same time" (click)="changeMultipleValue()">
 </div>
 <div>
+    <span>Array</span>
+    <input type="text" [(ngModel)]="arraySimpleValueSubject">
+    <input type="button" value="Change arraySimpleValue" (click)="changeArraySimpleValue()">
+    <input type="button" value="Change arraySimpleValue object" (click)="changeArraySimpleValueObject()">
+</div>
+<div>
     <span>Simple Object</span>
     <input type="text" [(ngModel)]="simpleObjectValue.name">
     <input type="text" [(ngModel)]="simpleObjectValue.age">
     <input type="button" value="Change simpleObject" (click)="ChangeSimpleObject()">
+</div>
+<div>
+    <span>Deep Object</span>
+    <input type="text" [(ngModel)]="deepObjectValue.simpleProperty">
+    <input type="text" [(ngModel)]="deepObjectValue.objectProperty.name">
+    <input type="text" [(ngModel)]="deepObjectValue.objectProperty.age">
+    <input type="button" value="Change objectProperty" (click)="ChangeObjectProperty()">
+    <input type="button" value="Change arrayObjectProperty" (click)="ChangeArrayObjectProperty()">
+</div>
+<div>
+    <span>Simple Object With Observable</span>
+    <input type="text" [(ngModel)]="simpleObjectValueSubject.name">
+    <input type="text" [(ngModel)]="simpleObjectValueSubject.age">
+    <input type="button" value="Change simpleObject property with observable" (click)="ChangeSimpleObjectPropertyWithObservable()">
 </div>
 <div>
     <app-child
@@ -21,5 +41,8 @@
         [childSecondSimpleValue]="secondSimpleValue"
         [childSimpleObjectValue]="simpleObjectValue"
         [childSimpleObjectValueName]="simpleObjectValue.name"
+        [childArraySimpleValue]="arraySimpleValue"
+        [childDeepObjectValue]="deepObjectValue"
+        [childSimpleObjecObservable]="simpleObjectValue$"
     ></app-child>
 </div>
