@@ -30,6 +30,12 @@
     <input type="button" value="Change arrayObjectProperty" (click)="ChangeArrayObjectProperty()">
 </div>
 <div>
+    <span>Simple Object With Observable</span>
+    <input type="text" [(ngModel)]="simpleObjectValueSubject.name">
+    <input type="text" [(ngModel)]="simpleObjectValueSubject.age">
+    <input type="button" value="Change simpleObject property with observable" (click)="ChangeSimpleObjectPropertyWithObservable()">
+</div>
+<div>
     <app-child
         [childSimpleValue]="simpleValue"
         [childSecondSimpleValue]="secondSimpleValue"
@@ -37,5 +43,6 @@
         [childSimpleObjectValueName]="simpleObjectValue.name"
         [childArraySimpleValue]="arraySimpleValue"
         [childDeepObjectValue]="deepObjectValue"
+        [childSimpleObjecObservable]="simpleObjectValue$"
     ></app-child>
 </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { DeepObject } from 'src/app/model/deep-object';
 
 // Model
@@ -11,6 +12,7 @@ import { SimpleObject } from 'src/app/model/simple-object';
 })
 export class ParentComponent implements OnInit {
 
+    // SimpleChange
     simpleValue: string = '';
     secondSimpleValue: string = '';
     arraySimpleValue: string[] = [];
@@ -19,6 +21,9 @@ export class ParentComponent implements OnInit {
     simpleObjectValue: SimpleObject = new SimpleObject();
 
     deepObjectValue: DeepObject = new DeepObject();
+
+    simpleObjectValueSubject: SimpleObject = new SimpleObject();
+    simpleObjectValue$: BehaviorSubject<SimpleObject> = new BehaviorSubject<SimpleObject>(this.simpleObjectValueSubject);
 
     constructor() { }
 
@@ -68,5 +73,17 @@ export class ParentComponent implements OnInit {
 
         this.deepObjectValue.arrayObjectProperty.push(firstSimpleObject, secondSimpleObject);
     }
+
+    ChangeSimpleObjectPropertyWithObservable() {
+        this.simpleObjectValue$.value.age = 10;
+        this.simpleObjectValue$.next(this.simpleObjectValue$.value);
+
+        const simpleObjectValue = new SimpleObject();
+        simpleObjectValue.name = 'new object';
+        simpleObjectValue.age = 1;
+
+        this.simpleObjectValue$.next(simpleObjectValue);
+    }
+
 
 }
