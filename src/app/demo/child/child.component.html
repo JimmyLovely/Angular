@@ -21,9 +21,15 @@
 </div>
 
 <div>
-    <span>Simple Object</span>
+    <span>Deep Object</span>
     <input type="text" [(ngModel)]="childDeepObjectValue.simpleProperty">
     <input type="text" [(ngModel)]="childDeepObjectValue.objectProperty.name">
     <input type="text" [(ngModel)]="childDeepObjectValue.objectProperty.age">
     <span>{{childDeepObjectValue.arrayObjectProperty.join('-')}}</span>
+</div>
+
+<div>
+    <span>Simple Object With Observable</span>
+    <span>{{(childSimpleObjectValue$| async).name}}</span>
+    <span>{{(childSimpleObjectValue$| async).age}}</span>
 </div>
