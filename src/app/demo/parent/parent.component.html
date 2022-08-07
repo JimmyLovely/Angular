@@ -36,6 +36,17 @@
     <input type="button" value="Change simpleObject property with observable" (click)="ChangeSimpleObjectPropertyWithObservable()">
 </div>
 <div>
+    <span>Input and Output demo</span>
+</div>
+<div>
+    <input type="text" [(ngModel)]="simpleInputValue">
+</div>
+<div>
+    <input type="button" value="changeDisplayFn" (click)="changeDisplayFn()">
+    <input type="button" value="changeDisplayFnWithChildProperty" (click)="changeDisplayFnWithChildProperty()">
+    <input type="button" value="changeDisplayFnWithParentProperty" (click)="changeDisplayFnWithParentProperty()">
+</div>
+<div>
     <app-child
         [childSimpleValue]="simpleValue"
         [childSecondSimpleValue]="secondSimpleValue"
@@ -44,5 +55,7 @@
         [childArraySimpleValue]="arraySimpleValue"
         [childDeepObjectValue]="deepObjectValue"
         [childSimpleObjecObservable]="simpleObjectValue$"
+        [ChildSimpleInputBindingName]="simpleInputValue"
+        [ChildDisplayFn]="displayFn"
     ></app-child>
 </div>

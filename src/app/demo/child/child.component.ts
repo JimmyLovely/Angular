@@ -12,7 +12,7 @@ import { SimpleObject } from 'src/app/model/simple-object';
 })
 export class ChildComponent implements OnInit, OnChanges {
 
-    // SimpleChange
+    //#region  SimpleChange
     @Input() childSimpleValue: string = '';
     @Input() childSecondSimpleValue: string = '';
     @Input() childSimpleObjectValue: SimpleObject = new SimpleObject();
@@ -28,8 +28,21 @@ export class ChildComponent implements OnInit, OnChanges {
 
     innerSimpleValueSubject: string = '';
     innerSimpleValue: string = '';
+    //#endregion
 
-    constructor() { }
+    // input and output demo
+
+    // 1. input property is optional for parent component
+    // 2. default value is only useful in constructor()
+    @Input('ChildSimpleInputBindingName') ChildSimpleInputValue: string = 'child default value';
+    childSimpleInputValueFormatted: string = 'formatted value';
+    simpleInputAnotherValue: string = 'another value'
+
+    @Input() ChildDisplayFn: (data: any) => string;
+
+    constructor() {
+        window.console.log('constructor');
+    }
 
     ngOnInit(): void {
         this.childSimpleObjectValue$.subscribe(childSimpleObjectValue => {
@@ -101,6 +114,14 @@ export class ChildComponent implements OnInit, OnChanges {
     changeInnerValue() {
         this.innerSimpleValue = this.innerSimpleValueSubject;
         this.childSimpleValue = this.innerSimpleValueSubject;
+    }
+
+    showCurrentValue() {
+        window.console.log('showCurrentValue');
+    }
+
+    showDisplayFn() {
+        this.childSimpleInputValueFormatted = this.ChildDisplayFn(this.ChildSimpleInputValue);
     }
 
 
