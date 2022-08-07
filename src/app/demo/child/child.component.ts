@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, Output, SimpleChanges, EventEmitter } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { DeepObject } from 'src/app/model/deep-object';
 
@@ -12,7 +12,7 @@ import { SimpleObject } from 'src/app/model/simple-object';
 })
 export class ChildComponent implements OnInit, OnChanges {
 
-    // SimpleChange
+    //#region  SimpleChange
     @Input() childSimpleValue: string = '';
     @Input() childSecondSimpleValue: string = '';
     @Input() childSimpleObjectValue: SimpleObject = new SimpleObject();
@@ -28,8 +28,28 @@ export class ChildComponent implements OnInit, OnChanges {
 
     innerSimpleValueSubject: string = '';
     innerSimpleValue: string = '';
+    //#endregion
 
-    constructor() { }
+    // input and output demo
+
+    // 1. input property is optional for parent component
+    // 2. default value is only useful in constructor()
+    @Input('ChildSimpleInputBindingName') ChildSimpleInputValue: string = 'child default value';
+    childSimpleInputValueFormatted: string = 'formatted value';
+    simpleInputAnotherValue: string = 'another value'
+
+    @Input() ChildDisplayFn: (data: any) => string;
+
+    // 1. output property is optional for parent component
+    //      it's mandatory to new EventEmitter() here
+    @Output() ChildSimpleOutput: EventEmitter<any> = new EventEmitter();
+
+    // same with Output
+    @Input() $ChildSimpleInputValueSubject: BehaviorSubject<string>;
+
+    constructor() {
+        window.console.log('constructor');
+    }
 
     ngOnInit(): void {
         this.childSimpleObjectValue$.subscribe(childSimpleObjectValue => {
@@ -101,6 +121,28 @@ export class ChildComponent implements OnInit, OnChanges {
     changeInnerValue() {
         this.innerSimpleValue = this.innerSimpleValueSubject;
         this.childSimpleValue = this.innerSimpleValueSubject;
+    }
+
+    showCurrentValue() {
+        window.console.log('showCurrentValue');
+    }
+
+    showDisplayFn() {
+        this.childSimpleInputValueFormatted = this.ChildDisplayFn(this.ChildSimpleInputValue);
+    }
+
+    emitEvent() {
+        this.ChildSimpleOutput.emit(this.ChildSimpleInputValue);
+    }
+
+    // same with emitEvent()
+    emitEventWithNext() {
+        this.ChildSimpleOutput.next(this.ChildSimpleInputValue);
+    }
+
+    // same with Output
+    emitDataWithObservable() {
+        this.$ChildSimpleInputValueSubject.next(this.ChildSimpleInputValue);
     }
 
 

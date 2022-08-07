@@ -33,3 +33,23 @@
     <span>{{(childSimpleObjectValue$| async).name}}</span>
     <span>{{(childSimpleObjectValue$| async).age}}</span>
 </div>
+
+<div>
+    <span>Input and Output demo</span>
+</div>
+<div>
+    <input type="text" [(ngModel)]="ChildSimpleInputValue">
+</div>
+<div>
+    <span>Display Function</span>
+    <input type="text" [(ngModel)]="childSimpleInputValueFormatted">
+    <input type="button" value="Show display function" (click)="showDisplayFn()">
+</div>
+<div>
+    <input type="button" value="Show current value" (click)="showCurrentValue()">
+</div>
+<div>
+    <input type="button" value="Emit event" (click)="emitEvent()">
+    <input type="button" value="Emit event -> next" (click)="emitEventWithNext()">
+    <input type="button" value="Emit data -> observable" (click)="emitDataWithObservable()">
+</div>

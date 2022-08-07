@@ -12,7 +12,7 @@ import { SimpleObject } from 'src/app/model/simple-object';
 })
 export class ParentComponent implements OnInit {
 
-    // SimpleChange
+    //#region SimpleChange
     simpleValue: string = '';
     secondSimpleValue: string = '';
     arraySimpleValue: string[] = [];
@@ -24,10 +24,19 @@ export class ParentComponent implements OnInit {
 
     simpleObjectValueSubject: SimpleObject = new SimpleObject();
     simpleObjectValue$: BehaviorSubject<SimpleObject> = new BehaviorSubject<SimpleObject>(this.simpleObjectValueSubject);
+    //#endregion
+
+    // input and output demo
+    simpleInputValue: string = '123';
+    simpleInputAnotherValue: string = 'parent value';
+
+    $SimpleInputValue: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
     constructor() { }
 
     ngOnInit(): void {
+        // same with output event
+        this.$SimpleInputValue.subscribe(this.simpleOutput);
     }
 
     changeMultipleValue() {
@@ -83,6 +92,36 @@ export class ParentComponent implements OnInit {
         simpleObjectValue.age = 1;
 
         this.simpleObjectValue$.next(simpleObjectValue);
+    }
+
+    displayFn(data: string) {
+        return `${data}1`;
+    }
+
+    changeDisplayFn() {
+        // SimpleChange will be triggered in child component
+        this.displayFn = function (data:any) {
+            return `${data}2`;
+        }
+    }
+
+    changeDisplayFnWithChildProperty() {
+        // `this` means child component here
+        this.displayFn = function (data:any) {
+            return `${data}-${this.simpleInputAnotherValue}`;
+        }
+    }
+
+    changeDisplayFnWithParentProperty() {
+        var tmpValue = this.simpleInputAnotherValue;
+
+        this.displayFn = function (data:any) {
+            return `${data}-${tmpValue}`;
+        }
+    }
+
+    simpleOutput(e) {
+        window.console.log('parent simpleOutput', e);
     }
 
 
