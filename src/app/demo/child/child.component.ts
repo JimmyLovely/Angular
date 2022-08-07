@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, Output, SimpleChanges, EventEmitter } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { DeepObject } from 'src/app/model/deep-object';
 
@@ -39,6 +39,13 @@ export class ChildComponent implements OnInit, OnChanges {
     simpleInputAnotherValue: string = 'another value'
 
     @Input() ChildDisplayFn: (data: any) => string;
+
+    // 1. output property is optional for parent component
+    //      it's mandatory to new EventEmitter() here
+    @Output() ChildSimpleOutput: EventEmitter<any> = new EventEmitter();
+
+    // same with Output
+    @Input() $ChildSimpleInputValueSubject: BehaviorSubject<string>;
 
     constructor() {
         window.console.log('constructor');
@@ -122,6 +129,20 @@ export class ChildComponent implements OnInit, OnChanges {
 
     showDisplayFn() {
         this.childSimpleInputValueFormatted = this.ChildDisplayFn(this.ChildSimpleInputValue);
+    }
+
+    emitEvent() {
+        this.ChildSimpleOutput.emit(this.ChildSimpleInputValue);
+    }
+
+    // same with emitEvent()
+    emitEventWithNext() {
+        this.ChildSimpleOutput.next(this.ChildSimpleInputValue);
+    }
+
+    // same with Output
+    emitDataWithObservable() {
+        this.$ChildSimpleInputValueSubject.next(this.ChildSimpleInputValue);
     }
 
 

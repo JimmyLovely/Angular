@@ -30,9 +30,13 @@ export class ParentComponent implements OnInit {
     simpleInputValue: string = '123';
     simpleInputAnotherValue: string = 'parent value';
 
+    $SimpleInputValue: BehaviorSubject<string> = new BehaviorSubject<string>('');
+
     constructor() { }
 
     ngOnInit(): void {
+        // same with output event
+        this.$SimpleInputValue.subscribe(this.simpleOutput);
     }
 
     changeMultipleValue() {
@@ -114,6 +118,10 @@ export class ParentComponent implements OnInit {
         this.displayFn = function (data:any) {
             return `${data}-${tmpValue}`;
         }
+    }
+
+    simpleOutput(e) {
+        window.console.log('parent simpleOutput', e);
     }
 
 

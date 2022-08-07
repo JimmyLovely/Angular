@@ -57,5 +57,7 @@
         [childSimpleObjecObservable]="simpleObjectValue$"
         [ChildSimpleInputBindingName]="simpleInputValue"
         [ChildDisplayFn]="displayFn"
+        (ChildSimpleOutput)="simpleOutput($event)"
+        [$ChildSimpleInputValueSubject]="$SimpleInputValue"
     ></app-child>
 </div>

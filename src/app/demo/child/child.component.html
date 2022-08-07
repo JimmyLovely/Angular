@@ -43,8 +43,13 @@
 <div>
     <span>Display Function</span>
     <input type="text" [(ngModel)]="childSimpleInputValueFormatted">
-    <input type="button" value="Show Display Function" (click)="showDisplayFn()">
+    <input type="button" value="Show display function" (click)="showDisplayFn()">
 </div>
 <div>
-    <input type="button" value="Show Current Value" (click)="showCurrentValue()">
+    <input type="button" value="Show current value" (click)="showCurrentValue()">
+</div>
+<div>
+    <input type="button" value="Emit event" (click)="emitEvent()">
+    <input type="button" value="Emit event -> next" (click)="emitEventWithNext()">
+    <input type="button" value="Emit data -> observable" (click)="emitDataWithObservable()">
 </div>
