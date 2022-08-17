@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, fromEvent, interval, Observable, Observer, of, pipe, range, Subscriber } from "rxjs";
-import { catchError, filter, last, map, retry, take, tap } from 'rxjs/operators';
+import { BehaviorSubject, from, fromEvent, interval, Observable, Observer, of, pipe, range, Subscriber, timer } from "rxjs";
+import { catchError, filter, first, last, map, retry, take, tap } from 'rxjs/operators';
 import { ajax, AjaxResponse } from 'rxjs/ajax';
 
 // Model
@@ -20,6 +20,9 @@ export class RxjsComponent implements OnInit {
     private vms$: Observable<IVm[]>;
 
     private vms1$: Observable<IVm[]>;
+
+    private basicValueSubject: BehaviorSubject<number> = new BehaviorSubject<number>(1);
+    public basicValue$ = this.basicValueSubject.asObservable();
 
     constructor(
         private vmService: IVmService
@@ -264,5 +267,35 @@ export class RxjsComponent implements OnInit {
         ).subscribe(x => {
             window.console.log(x);
         })
+    }
+
+    bindSubScriber1() {
+        const basicValueSubScriber1 = this.basicValue$.pipe(
+            take(2),
+            last()
+        ).subscribe(x => {
+            window.console.log('basicValueSubScriber1', x);
+        }, error => {
+            window.console.log('error', error);
+        }, () => {
+            window.console.log('basicValueSubScriber1 complete');
+        });
+    }
+
+    bindSubScriber2() {
+        const basicValueSubScriber2 = this.basicValue$.pipe(
+            take(2),
+            last()
+        ).subscribe(x => {
+            window.console.log('basicValueSubScriber2', x);
+        }, error => {
+            window.console.log('error', error);
+        }, () => {
+            window.console.log('basicValueSubScriber2 complete');
+        });
+    }
+
+    changeBasicValueSubject() {
+        this.basicValueSubject.next(this.basicValueSubject.getValue() + 1);
     }
 }
