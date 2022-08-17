@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, from, fromEvent, interval, Observable, Observer, of, pipe, range, Subscriber, timer } from "rxjs";
-import { catchError, filter, first, last, map, retry, take, tap } from 'rxjs/operators';
+import { catchError, delay, filter, first, last, map, retry, take, tap } from 'rxjs/operators';
 import { ajax, AjaxResponse } from 'rxjs/ajax';
 
 // Model
@@ -298,4 +298,45 @@ export class RxjsComponent implements OnInit {
     changeBasicValueSubject() {
         this.basicValueSubject.next(this.basicValueSubject.getValue() + 1);
     }
+
+    // 1. Subject -> complete() will complete all observers
+    // 2. SubScription -> unsubscribe() will delete current subscription
+    // 3. Pipe -> observer-> complete() will delete current subscription
+    //      will only complete current observer
+    bindSubScriber3() {
+        const basicValueSubScriber1 = this.basicValue$.pipe(
+            map(x => x * 100),
+            // delay(10000),
+            // first(x => x > 10)
+        ).subscribe(x => {
+            window.console.log('basicValueSubScriber3', x);
+        }, error => {
+            window.console.log('error', error);
+        }, () => {
+            window.console.log('basicValueSubScriber3 complete');
+        });
+
+        // 1. will not get value
+        // 2. it's not suggestion to get value from observable directly
+        //      -. subscribe a observable and unsubscribe it will get current value
+        //      -. `firstValueFrom`
+        const basicValueSubScriber5 = this.basicValue$.pipe(
+            delay(1000)
+        ).subscribe(x => {
+            window.console.log('basicValueSubScriber5', x);
+        }).unsubscribe();
+    }
+
+    // 1. invoke a method which contains subscribe method more than one time will create more than one subscribers
+    bindSubScriber4() {
+        const basicValueSubScriber2 = this.basicValue$.pipe(
+        ).subscribe(x => {
+            window.console.log('basicValueSubScriber4', x);
+        }, error => {
+            window.console.log('error', error);
+        }, () => {
+            window.console.log('basicValueSubScriber4 complete');
+        });
+    }
+
 }
