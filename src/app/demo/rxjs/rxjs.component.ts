@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, from, fromEvent, interval, Observable, Observer, of, pipe, range, Subscriber, timer } from "rxjs";
-import { catchError, delay, filter, first, last, map, retry, take, tap, throttle, throttleTime } from 'rxjs/operators';
+import { catchError, delay, filter, first, last, map, retry, share, shareReplay, take, tap, throttle, throttleTime } from 'rxjs/operators';
 import { ajax, AjaxResponse } from 'rxjs/ajax';
 
 // Model
@@ -369,15 +369,16 @@ export class RxjsComponent implements OnInit {
     bindSubScriber7() {
         const basicValueProjection$ = this.basicValue$.pipe(
             map(x => x* 100),
-            take(3),
             tap(x => {
                 window.console.log(x);
-            })
+            }),
+            // share(),
+            // shareReplay(1)
         )
 
         const basicValueSubScriber7 = basicValueProjection$.pipe(
             map(x => x* 100),
-            take(2)
+            // share()      share will only effect for current pipe
         ).subscribe(x => {
             window.console.log('basicValueSubScriber7', x);
         }, error => {
@@ -392,6 +393,18 @@ export class RxjsComponent implements OnInit {
             window.console.log('error', error);
         }, () => {
             window.console.log('basicValueSubScriber8 complete');
+        });
+
+        this.changeBasicValueSubject();
+        this.changeBasicValueSubject();
+        this.changeBasicValueSubject();
+
+        const basicValueSubScriber9 = basicValueProjection$.subscribe(x => {
+            window.console.log('basicValueSubScriber9', x);
+        }, error => {
+            window.console.log('error', error);
+        }, () => {
+            window.console.log('basicValueSubScriber9 complete');
         });
     }
 
