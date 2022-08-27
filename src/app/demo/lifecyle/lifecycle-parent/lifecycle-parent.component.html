@@ -1,0 +1,24 @@
+<p>lifecycle-parent works!</p>
+<div>
+    <span>simpleValue</span>
+    <input type="text" [(ngModel)]="parentSimpleValue">
+</div>
+<div>
+    <span>simpleObject</span>
+    <input type="text" [(ngModel)]="parentSimpleObject.name" >
+    <input type="text" [(ngModel)]="parentSimpleObject.age" >
+</div>
+<div>
+    <span>simpleObject$</span>
+    <input type="text" [(ngModel)]="tmpSimpleObject.name" >
+    <input type="text" [(ngModel)]="tmpSimpleObject.age" >
+    <input type="button" value="Update simpleObject$" (click)="updateSimpleObject()">
+</div>
+
+<div>
+    <app-lifecycle-child
+        [childSimpleValue] ="parentSimpleValue"
+        [childSimpleObject]="parentSimpleObject"
+        [childSimpleObject$]="parentSimpleObject$"
+    ></app-lifecycle-child>
+</div>

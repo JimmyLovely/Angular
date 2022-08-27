@@ -1,0 +1,27 @@
+<p>lifecycle-child works!</p>
+
+<div>
+    <span>SimpleValue</span>
+    <input type="text" [(ngModel)]="childSimpleValue">
+</div>
+<div>
+    <span>simpleObject</span>
+    <input type="text" [(ngModel)]="childSimpleObject.name" >
+    <input type="text" [(ngModel)]="childSimpleObject.age" >
+</div>
+<div>
+    <span>simpleObject$</span>
+    <input type="text" [(ngModel)]="innerSimpleObject.name" >
+    <input type="text" [(ngModel)]="innerSimpleObject.age" >
+</div>
+
+<div>
+    <span>Inner Value</span>
+    <input type="text" [(ngModel)]="innerValue">
+</div>
+
+<div>
+    <span>Element</span>
+    <input type="text" value="element" #inputDemo>
+    <input type="button" value="Change the color of element" (click)="changeTheColorOfElement()">
+</div>

@@ -10,6 +10,8 @@ import { I18nComponent } from "./i18n/i18n.component";
 import { FormBasisComponent } from './form-basis/form-basis.component';
 import { ParentComponent } from "./parent/parent.component";
 import { ChildComponent } from "./child/child.component";
+import { LifecycleChildComponent } from "./lifecyle/lifecycle-child/lifecycle-child.component";
+import { LifecycleParentComponent } from "./lifecyle/lifecycle-parent/lifecycle-parent.component";
 
 const routes: Routes = [
     {
@@ -37,14 +39,20 @@ const routes: Routes = [
             }, {
                 path: 'child',
                 component: ChildComponent
-            }
-        ]
-    }
+            }, {
+                path: 'lifecycle/child',
+                component: LifecycleChildComponent
+            }, {
+                path: 'lifecycle/parent',
+                component: LifecycleParentComponent
+            },
+        ],
+    },
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+    exports: [RouterModule],
 })
 export class DemoRoutingModule { }
 
@@ -56,5 +64,7 @@ export const DemoComponents = [
     I18nComponent,
     FormBasisComponent,
     ParentComponent,
-    ChildComponent
+    ChildComponent,
+    LifecycleParentComponent,
+    LifecycleChildComponent,
 ];

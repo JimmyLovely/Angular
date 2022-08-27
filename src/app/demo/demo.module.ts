@@ -20,25 +20,25 @@ import { VmDetailService } from '../mock/vm-detail.service';
 @NgModule({
   declarations: [
     ...DemoComponents,
-    MachineNameRenderComponent
+    MachineNameRenderComponent,
   ],
   entryComponents: [
-    MachineNameRenderComponent
+    MachineNameRenderComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     Ng2SmartTableModule,
-    DemoRoutingModule
+    DemoRoutingModule,
   ],
   providers: [
     {
       provide: IVmService,
-      useClass: VmMockService
+      useClass: VmMockService,
     },{
       provide: IVmDetailService,
-      useClass: VmDetailService
-    }
+      useClass: VmDetailService,
+    },
   ],
 })
 export class DemoModule { }
