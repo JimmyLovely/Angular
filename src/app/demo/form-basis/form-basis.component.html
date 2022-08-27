@@ -23,3 +23,24 @@
     <!-- value: attribute -> property only, if property changed, attribute -\-> property-->
     <input type="text" maxlength="4" id="ti" data-custom-attr="custom attr" title1='title1'>
 </div>
+
+<div>
+    <span>Container</span>
+    <input type="button" value="toggleIsShowData" (click)="toggleIsShowData()">
+    <span>If</span>
+    <ng-container *ngIf="isShowData; else hideDataTemplate">
+        <span>Inner show data</span>
+    </ng-container>
+
+    <span>If Else</span>
+    <ng-container *ngIf="isShowData then showDataTemplate; else hideDataTemplate">
+    </ng-container>
+    <span>End</span>
+    <ng-template #showDataTemplate>
+        <span>show Data</span>
+    </ng-template>
+
+    <ng-template #hideDataTemplate>
+        <span>Hide Data</span>
+    </ng-template>
+</div>

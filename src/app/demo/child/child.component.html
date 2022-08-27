@@ -53,3 +53,10 @@
     <input type="button" value="Emit event -> next" (click)="emitEventWithNext()">
     <input type="button" value="Emit data -> observable" (click)="emitDataWithObservable()">
 </div>
+
+<div>
+    <span>Content</span>
+    <ng-content select="input"></ng-content>
+    <ng-content select="div"></ng-content>
+    <!-- <ng-content select=".red"></ng-content> -->
+</div>
