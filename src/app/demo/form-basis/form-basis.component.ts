@@ -7,11 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormBasisComponent implements OnInit {
 
-    public data: string = 'hello';
+    data: string = 'hello';
+
+    isShowData: boolean = false;
 
     constructor() { }
 
     ngOnInit(): void {
+    }
+
+    toggleIsShowData() {
+        this.isShowData = !this.isShowData;
     }
 
 }

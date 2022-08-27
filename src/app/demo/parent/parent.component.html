@@ -59,5 +59,14 @@
         [ChildDisplayFn]="displayFn"
         (ChildSimpleOutput)="simpleOutput($event)"
         [$ChildSimpleInputValueSubject]="$SimpleInputValue"
-    ></app-child>
+    >
+        <div name="innerDiv">
+            innerDiv
+        </div>
+        <div class="red">
+            red class
+        </div>
+        <input type="button" value="Test">
+        <label>inner lable</label>
+    </app-child>
 </div>
