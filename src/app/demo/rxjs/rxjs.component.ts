@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, fromEvent, interval, Observable, Observer, of, pipe, range, Subscriber } from "rxjs";
-import { catchError, filter, last, map, retry, take, tap } from 'rxjs/operators';
+import { BehaviorSubject, from, fromEvent, interval, Observable, Observer, of, pipe, range, Subscriber, timer } from "rxjs";
+import { catchError, delay, filter, first, last, map, retry, share, shareReplay, take, tap, throttle, throttleTime } from 'rxjs/operators';
 import { ajax, AjaxResponse } from 'rxjs/ajax';
 
 // Model
@@ -20,6 +20,9 @@ export class RxjsComponent implements OnInit {
     private vms$: Observable<IVm[]>;
 
     private vms1$: Observable<IVm[]>;
+
+    private basicValueSubject: BehaviorSubject<number> = new BehaviorSubject<number>(1);
+    public basicValue$ = this.basicValueSubject.asObservable();
 
     constructor(
         private vmService: IVmService
@@ -265,4 +268,144 @@ export class RxjsComponent implements OnInit {
             window.console.log(x);
         })
     }
+
+    bindSubScriber1() {
+        const basicValueSubScriber1 = this.basicValue$.pipe(
+            take(2),
+            last()
+        ).subscribe(x => {
+            window.console.log('basicValueSubScriber1', x);
+        }, error => {
+            window.console.log('error', error);
+        }, () => {
+            window.console.log('basicValueSubScriber1 complete');
+        });
+    }
+
+    bindSubScriber2() {
+        const basicValueSubScriber2 = this.basicValue$.pipe(
+            take(2),
+            last()
+        ).subscribe(x => {
+            window.console.log('basicValueSubScriber2', x);
+        }, error => {
+            window.console.log('error', error);
+        }, () => {
+            window.console.log('basicValueSubScriber2 complete');
+        });
+    }
+
+    changeBasicValueSubject() {
+        this.basicValueSubject.next(this.basicValueSubject.getValue() + 1);
+    }
+
+    // 1. Subject -> complete() will complete all observers
+    // 2. SubScription -> unsubscribe() will delete current subscription
+    // 3. Pipe -> observer-> complete() will delete current subscription
+    //      will only complete current observer
+    bindSubScriber3() {
+        const basicValueSubScriber3 = this.basicValue$.pipe(
+            map(x => x * 100),
+            // delay(10000),
+            // first(x => x > 10)
+        ).subscribe(x => {
+            window.console.log('basicValueSubScriber3', x);
+        }, error => {
+            window.console.log('error', error);
+        }, () => {
+            window.console.log('basicValueSubScriber3 complete');
+        });
+
+        // 1. will not get value
+        // 2. it's not suggestion to get value from observable directly
+        //      -. subscribe a observable and unsubscribe it will get current value
+        //      -. `firstValueFrom`
+        const basicValueSubScriber5 = this.basicValue$.pipe(
+            delay(1000)
+        ).subscribe(x => {
+            window.console.log('basicValueSubScriber5', x);
+        }).unsubscribe();
+    }
+
+    // 1. invoke a method which contains subscribe method more than one time will create more than one subscribers
+    bindSubScriber4() {
+        const basicValueSubScriber4 = this.basicValue$.pipe(
+        ).subscribe(x => {
+            window.console.log('basicValueSubScriber4', x);
+        }, error => {
+            window.console.log('error', error);
+        }, () => {
+            window.console.log('basicValueSubScriber4 complete');
+        });
+    }
+
+    bindSubScriber5() {
+        const basicValueSubScriber5 = this.basicValue$.pipe(
+            map(x => x * 1000),
+            delay(1000),
+            throttleTime(1000),
+            // take(2),
+        ).subscribe(x => {
+            window.console.log('basicValueSubScriber5', x);
+        }, error => {
+            window.console.log('error', error);
+        }, () => {
+            window.console.log('basicValueSubScriber5 complete');
+        });
+    }
+
+    bindSubScriber6() {
+        const basicValueSubScriber6 = this.basicValue$.subscribe(x => {
+            window.console.log('basicValueSubScriber6', x);
+        }, error => {
+            window.console.log('error', error);
+        }, () => {
+            window.console.log('basicValueSubScriber6 complete');
+        });
+    }
+
+    // if pipe an Observable firstly, and then subscribe the converted Observable, the pipe will effect for multiple Observers
+    // otherwise, the pipe will only effect for current observer
+    bindSubScriber7() {
+        const basicValueProjection$ = this.basicValue$.pipe(
+            map(x => x* 100),
+            tap(x => {
+                window.console.log(x);
+            }),
+            // share(),
+            // shareReplay(1)
+        )
+
+        const basicValueSubScriber7 = basicValueProjection$.pipe(
+            map(x => x* 100),
+            // share()      share will only effect for current pipe
+        ).subscribe(x => {
+            window.console.log('basicValueSubScriber7', x);
+        }, error => {
+            window.console.log('error', error);
+        }, () => {
+            window.console.log('basicValueSubScriber7 complete');
+        });
+
+        const basicValueSubScriber8 = basicValueProjection$.subscribe(x => {
+            window.console.log('basicValueSubScriber8', x);
+        }, error => {
+            window.console.log('error', error);
+        }, () => {
+            window.console.log('basicValueSubScriber8 complete');
+        });
+
+        this.changeBasicValueSubject();
+        this.changeBasicValueSubject();
+        this.changeBasicValueSubject();
+
+        const basicValueSubScriber9 = basicValueProjection$.subscribe(x => {
+            window.console.log('basicValueSubScriber9', x);
+        }, error => {
+            window.console.log('error', error);
+        }, () => {
+            window.console.log('basicValueSubScriber9 complete');
+        });
+    }
+
 }
