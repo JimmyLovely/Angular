@@ -12,6 +12,7 @@ import { ParentComponent } from "./parent/parent.component";
 import { ChildComponent } from "./child/child.component";
 import { LifecycleChildComponent } from "./lifecyle/lifecycle-child/lifecycle-child.component";
 import { LifecycleParentComponent } from "./lifecyle/lifecycle-parent/lifecycle-parent.component";
+import { AgGridDemoComponent } from "./ag-grid-demo/ag-grid-demo.component";
 
 const routes: Routes = [
     {
@@ -45,6 +46,9 @@ const routes: Routes = [
             }, {
                 path: 'lifecycle/parent',
                 component: LifecycleParentComponent
+            }, {
+                path: 'ag-grid',
+                component: AgGridDemoComponent
             },
         ],
     },
@@ -67,4 +71,5 @@ export const DemoComponents = [
     ChildComponent,
     LifecycleParentComponent,
     LifecycleChildComponent,
+    AgGridDemoComponent,
 ];

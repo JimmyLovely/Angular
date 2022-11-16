@@ -1,0 +1,13 @@
+<p>ag-grid-demo works!</p>
+
+<div>
+    <ag-grid-angular
+        class="ag-theme-alpine"
+        style="width: 500px; height: 350px;"
+        [columnDefs]="columnDefs"
+        [gridOptions]="gridOptions"
+        [rowData]="simpleData"
+        (rowClicked)="onRowClicked($event)"
+        (rowDataChanged)="onRowDataChanged($event)"
+    ></ag-grid-angular>
+</div>

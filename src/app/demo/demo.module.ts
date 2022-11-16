@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from "@angular/forms";
+import { AgGridModule } from "ag-grid-angular";
 
 // 3rd
 import { Ng2SmartTableModule } from "ng2-smart-table";
@@ -28,6 +29,7 @@ import { VmDetailService } from '../mock/vm-detail.service';
   imports: [
     CommonModule,
     FormsModule,
+    AgGridModule,
     Ng2SmartTableModule,
     DemoRoutingModule,
   ],
