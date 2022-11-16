@@ -100,7 +100,7 @@ export class RxjsComponent implements OnInit {
         const apiData$ = ajax('/api/demo');
 
         apiData$.pipe(
-            map((res: AjaxResponse) => {
+            map((res: AjaxResponse<any>) => {
                 if (!res.response) {
                     throw new Error("Value expected!");
                 } else {

@@ -48,3 +48,6 @@ Thumbs.db
 
 # NPM
 package-lock.json
+
+# Buid
+.angular/
